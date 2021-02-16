@@ -9,11 +9,11 @@ task :console do
   ActiveRecord::Base.logger = Logger.new(STDOUT)
   Pry.start
 end
-
+#app to interface
 desc "start our app"
 task :start do
-  app = nameOfYourApp.new
-  app.run
+  interface = Interface.new
+  interface.welcome
 end
 
 namespace :remind_me_about do

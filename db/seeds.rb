@@ -9,22 +9,22 @@ Protein.reset_pk_sequence
 User.reset_pk_sequence
 
 #users
-max = User.create(name: "max")
-richi = User.create(name: "richi")
-nick = User.create(name: "nick")
-mo = User.create(name: "mo")
+max = User.create(name: "max", password: "123")
+richi = User.create(name: "richi", password: "123" ) 
+nick = User.create(name: "nick", password: "123")
+mo = User.create(name: "mo", password: "123")
 
 #protein
 beef = Protein.create(name: "beef")
 chicken = Protein.create(name: "chicken")
 
-#recipe
+#recipes
 recipe1 = Recipe.create(name: "chuck roast", ingredient: "beef", difficulty: 3, time: 8, rating: 10, protein_id: beef.id)
 recipe2 = Recipe.create(name: "chicken noodle", ingredient: "chicken", difficulty: 4, time: 4, rating: 8, protein_id: chicken.id)
 recipe3 = Recipe.create(name: "roast chicken", ingredient: "chicken", difficulty: 2, time: 4, rating: 2, protein_id: chicken.id)
 recipe4 = Recipe.create(name: "teriyaki beef", ingredient: "beef", difficulty: 1, time: 6, rating: 7, protein_id: beef.id)
 
-#user_reviews
+#user_recipes
 user_recipe1 = UserRecipe.create(name: "user_recipe1", user_id: max.id, recipe_id: recipe1.id)
 user_recipe2 = UserRecipe.create(name: "user_recipe2", user_id: richi.id, recipe_id: recipe2.id)
 user_recipe3 = UserRecipe.create(name: "user_recipe3", user_id: nick.id, recipe_id: recipe3.id)
