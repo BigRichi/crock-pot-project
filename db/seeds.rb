@@ -9,6 +9,11 @@ richi = User.create(name: "richi")
 nick = User.create(name: "nick")
 mo = User.create(name: "mo")
 
+#user_reviews
+user_review1 = UserReview.(name: "user_review1", user_id: User.first.id, recipe_id: Recipe.first.id)
+user_review2 = UserReview.(name: "user_review2", user_id: User.second.id, recipe_id: Recipe.second.id)
+user_review3 = UserReview.(name: "user_review3", user_id: User.third.id, recipe_id: Recipe.third.id)
+user_review4 = UserReview.(name: "user_review4", user_id: User.fourth.id, recipe_id: Recipe.fourth.id)
 
 
 # Plant.destroy_all
