@@ -25,7 +25,7 @@ class Interface
     end
 
     def login_helper
-        username = prompt.ask("Enter Username".downcase)
+        username = prompt.ask("Enter Username")
         password = prompt.ask("Enter Password")
         if User.find_by(name: username, password: password)
             self.user = User.find_by(name: username, password: password)
@@ -41,7 +41,9 @@ class Interface
     end
 
     def sign_up_helper
-        username = prompt.ask("Enter Username".downcase)
+        username = prompt.ask("Enter Username")
+        # username = username.downcase
+            # how do we make username downcase
         while User.find_by(name: username)
             puts "This username is already taken, please create a different username"
             username = prompt.ask("Enter Username")
