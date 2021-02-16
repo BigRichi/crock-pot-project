@@ -10,3 +10,5 @@ gem "pry"
 gem "faker"
 
 gem "colorize"
+gem "tty-prompt"
+gem 'activerecord-reset-pk-sequence'
