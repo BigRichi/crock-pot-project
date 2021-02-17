@@ -10,7 +10,7 @@ User.reset_pk_sequence
 
 #users
 max = User.create(name: "max", password: "123")
-richi = User.create(name: "richi", password: "123" ) 
+richi = User.create(name: "richi", password: "123") 
 nick = User.create(name: "nick", password: "123")
 mo = User.create(name: "mo", password: "123")
 
@@ -20,8 +20,11 @@ chicken = Protein.create(name: "chicken")
 
 #recipes
 recipe1 = Recipe.create(name: "chuck roast", ingredient: "beef", difficulty: 3, time: 8, rating: 10, protein_id: beef.id)
+
 recipe2 = Recipe.create(name: "chicken noodle", ingredient: "chicken", difficulty: 4, time: 4, rating: 8, protein_id: chicken.id)
+
 recipe3 = Recipe.create(name: "roast chicken", ingredient: "chicken", difficulty: 2, time: 4, rating: 2, protein_id: chicken.id)
+
 recipe4 = Recipe.create(name: "teriyaki beef", ingredient: "beef", difficulty: 1, time: 6, rating: 7, protein_id: beef.id)
 
 #user_recipes
