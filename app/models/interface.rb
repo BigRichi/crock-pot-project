@@ -1,7 +1,7 @@
 class Interface
 
-    attr_reader :prompt, :protein, :recipe 
-    attr_accessor :user
+    attr_reader :prompt, :protein, :recipe, :recipe_ingredient
+    attr_accessor :user, :recipe_ingredient_arr
 
 
     def initialize
@@ -43,6 +43,7 @@ class Interface
 
     def sign_up_helper
         username = prompt.ask("Enter Username")
+        binding.pry
         # username = username.downcase
             # how do we make username downcase
         while User.find_by(name: username)
@@ -78,8 +79,8 @@ class Interface
     def main_menu_beef
         system 'clear'
         prompt.select("Main Menu for Beef") do |menu|
-            menu.choice "teriyaki beef", -> {recipe_finder(4)}
-            menu.choice "chuck roast", -> {recipe_finder(1)}
+            menu.choice "teriyaki beef", -> {user_recipe_connection(4)}
+            menu.choice "chuck roast", -> {user_recipe_connection(1)}
             menu.choice "change protein", -> {choose_protein}
             menu.choice "Log Off", -> {exit_helper}
         end
@@ -88,13 +89,17 @@ class Interface
     def main_menu_chicken
         system 'clear'
         prompt.select("Main Menu for Chicken") do |menu|
-            menu.choice "chicken noodle", -> {recipe_finder(2)}
-            menu.choice "roast chicken", -> {recipe_finder(3)}
+            menu.choice "chicken noodle", -> {user_recipe_connection(2)}
+            menu.choice "roast chicken", -> {user_recipe_connection(3)}
             menu.choice "change protein", -> {choose_protein}
             menu.choice "Log Off", -> {exit_helper}
         end
     end
 
+    def user_recipe_connection(recipe_id)
+        UserRecipe.create(name: self.user.name, user_id: self.user.id, recipe_id: recipe_id)
+        recipe_finder(recipe_id)
+    end
     # ---- Recipe methods below ---- #
 
     def recipe_finder(recipe_id)
@@ -104,11 +109,37 @@ class Interface
             puts "Rating: #{i.rating}"
             puts "Cooking Time: #{i.time} hours"
             puts "Difficulty Level: #{i.difficulty}"
-            puts "Ingredients: #{i.ingredient}"
+            @recipe_ingredient = i.ingredient
         end
-        
+        prompt.select("What would you like to do?") do |menu|
+            menu.choice "See ingredients", -> {recipe_ingredients}
+            menu.choice "Choose a different protein", -> {choose_protein}
+            menu.choice "Exit", -> {exit_helper}
+        end
     end
 
+    def recipe_ingredients
+        @recipe_ingredient_arr = recipe_ingredient.split(", ")
+        puts recipe_ingredient_arr
+        prompt.select("Would you like to see a different recipe or add another ingredient?") do |menu|
+            menu.choice "yes", -> {choose_protein}
+            menu.choice "no", -> {exit_helper}
+            menu.choice "add ingredient", -> {ingredient_add_helper}
+            menu.choice "remove ingredient", -> {ingredient_remove_helper}
+        end
+    end 
+
+    def ingredient_add_helper
+        added_ingredient = prompt.ask("what ingredient would you like to add")
+        recipe_ingredient_arr << added_ingredient
+        puts recipe_ingredient_arr
+        binding.pry
+        # puts "What ingredient would you like to "
+
+        # STDN.gets.chomp
+    end 
+
+    # user.recipie.ingredient.update(ingredient: added_ingredient)
     # def recipe_att
     #     recipe_finder
     # end

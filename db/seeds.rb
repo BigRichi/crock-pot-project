@@ -19,19 +19,19 @@ beef = Protein.create(name: "beef")
 chicken = Protein.create(name: "chicken")
 
 #recipes
-recipe1 = Recipe.create(name: "chuck roast", ingredient: "beef", difficulty: 3, time: 8, rating: 10, protein_id: beef.id)
+recipe1 = Recipe.create(name: "chuck roast", ingredient: "4 lbs chuck roast, 1 package Good Seasons Italian Dressing, 1 package Lipton Onion dry soup mix, 2-3 cans beef broth or enough to cover roast", difficulty: 3, time: 8, rating: 10, protein_id: beef.id)
 
-recipe2 = Recipe.create(name: "chicken noodle", ingredient: "chicken", difficulty: 4, time: 4, rating: 8, protein_id: chicken.id)
+recipe2 = Recipe.create(name: "chicken noodle", ingredient: "1 1/2 lb. boneless skinless chicken breasts, 1 large onion, 3 carrots, 2 stalks celery, 4 tsp. sprigs fresh thyme, 4 tsp. sprigs fresh rosemary, 3 cloves garlic, 1 bay leaf, Kosher salt, Freshly ground black pepper, 10 c. low-sodium chicken broth, 8 oz. egg noodles", difficulty: 4, time: 4, rating: 8, protein_id: chicken.id)
 
-recipe3 = Recipe.create(name: "roast chicken", ingredient: "chicken", difficulty: 2, time: 4, rating: 2, protein_id: chicken.id)
+recipe3 = Recipe.create(name: "roast chicken", ingredient: "5 lb whole chicken neck and giblets removed, 1 tablespoon brown sugar, 2 teaspoons salt, 1 teaspoon pepper, 1/2 teaspoon garlic powder, 1/2 teaspoon onion powder, 1 tablespoon smoked paprika", difficulty: 2, time: 4, rating: 2, protein_id: chicken.id)
 
-recipe4 = Recipe.create(name: "teriyaki beef", ingredient: "beef", difficulty: 1, time: 6, rating: 7, protein_id: beef.id)
+recipe4 = Recipe.create(name: "teriyaki beef", ingredient: "2 lbs. cubed beef stew meat, 1 cup Soy Vay Veri Veri Teriyaki sauce, 1 cup diced white onion, toasted sesame seeds, sliced green onion, steamed white or brown rice, broccoli or sugar snap peas", difficulty: 1, time: 6, rating: 7, protein_id: beef.id)
 
-#user_recipes
-user_recipe1 = UserRecipe.create(name: "user_recipe1", user_id: max.id, recipe_id: recipe1.id)
-user_recipe2 = UserRecipe.create(name: "user_recipe2", user_id: richi.id, recipe_id: recipe2.id)
-user_recipe3 = UserRecipe.create(name: "user_recipe3", user_id: nick.id, recipe_id: recipe3.id)
-user_recipe4 = UserRecipe.create(name: "user_recipe4", user_id: mo.id, recipe_id: recipe4.id)
+# #user_recipes
+# user_recipe1 = UserRecipe.create(name: "user_recipe1", user_id: max.id, recipe_id: recipe1.id)
+# user_recipe2 = UserRecipe.create(name: "user_recipe2", user_id: richi.id, recipe_id: recipe2.id)
+# user_recipe3 = UserRecipe.create(name: "user_recipe3", user_id: nick.id, recipe_id: recipe3.id)
+# user_recipe4 = UserRecipe.create(name: "user_recipe4", user_id: mo.id, recipe_id: recipe4.id)
 
 # Plant.destroy_all
 # Person.destroy_all
