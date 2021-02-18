@@ -9,6 +9,7 @@ class Interface
     end 
 
     def welcome
+        system 'rake db:seed'
         system 'clear'
         Logo.start
         puts "Hello, and welcome to Crockpot Recipe Finder!"
@@ -47,7 +48,7 @@ class Interface
         binding.pry
         # username = username.downcase
             # how do we make username downcase
-        while User.find_by(name: username)
+        while User.find_by(name: username.downcase)
             puts "This username is already taken, please create a different username"
             username = prompt.ask("Enter Username")
         end
@@ -64,12 +65,12 @@ class Interface
         prompt.select("What would you like to do today #{user.name}?") do |menu|
             menu.choice "Choose Protein", -> {choose_protein}
             menu.choice "Exit!", -> {exit_helper}
-            menu.choice "Delete Account!", -> {delete_account_helper}
+            menu.choice "Delete Account!?!?", -> {delete_account_helper}
         end
     end
 
     def exit_helper
-        puts "Goodbye"
+        puts "Goodbye 👋"
         sleep(2)
         system 'clear'
     end
@@ -86,7 +87,7 @@ class Interface
         system 'clear'
         prompt.select("Which protein would you like to see recipes for?") do |menu|
             Protein.all.each do |protein|
-                menu.choice protein.name, -> {main_menu_protein(protein.id)}
+                menu.choice protein.name.capitalize, -> {main_menu_protein(protein.id)}
             end
             # protein.choice "Chicken", -> {main_menu_chicken}# -> something
             # protein.choice "Beef", -> {main_menu_beef}# -> something
@@ -100,9 +101,9 @@ class Interface
         system 'clear'
         prompt.select("Main Menu") do |menu|
             Recipe.all.where(protein_id: protein_id).each do |recp|
-                menu.choice recp.name, -> {user_recipe_connection(recp.id)}
+                menu.choice recp.name.capitalize, -> {user_recipe_connection(recp.id)}
             end
-            menu.choice "change protein", -> {choose_protein}
+            menu.choice "Change Protein", -> {choose_protein}
             menu.choice "Log Off", -> {exit_helper}
         end
     end
@@ -143,12 +144,12 @@ class Interface
         @recipe_ingredient_arr = recipe_ingredient.split(", ")
         puts " "
         p recipe_ingredient_arr
-        prompt.select("Would you like to see a different recipe or add another ingredient?") do |menu|
-            menu.choice "yes", -> {choose_protein}
-            menu.choice "no", -> {exit_helper}
-            menu.choice "update recipe rating", -> {update_recipe_rating(recipe_id)}
-            menu.choice "add ingredient", -> {ingredient_add_helper}
-            menu.choice "remove ingredient", -> {ingredient_remove_helper}
+        prompt.select("Options") do |menu|
+            menu.choice "Choose New Protein", -> {choose_protein}
+            menu.choice "Update Recipe Rating", -> {update_recipe_rating(recipe_id)}
+            menu.choice "Add Ingredient", -> {ingredient_add_helper}
+            menu.choice "Remove Ingredient", -> {ingredient_remove_helper}
+            menu.choice "Exit", -> {exit_helper}
         end
     end 
 
