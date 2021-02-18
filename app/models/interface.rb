@@ -21,7 +21,7 @@ class Interface
             menu.choice "Login", -> {login_helper}
             menu.choice "Sign up", -> {sign_up_helper}
             menu.choice "Exit", -> {exit_helper}
-            menu.choice "Protein", -> {choose_protein}
+            #menu.choice "Protein", -> {choose_protein}
         end
     end
 
@@ -33,7 +33,7 @@ class Interface
             # no music yet
             puts "Let's Get Cookin #{self.user.name.upcase}!!!"
             #sleep(1.5)
-            choose_protein
+            main_menu
         else
             puts "Incorrect Username or Password" #potentially add emoji's
             #sleep(1.5)
@@ -56,7 +56,15 @@ class Interface
         #sleep(0.8)
         puts "Let's Get Cookin #{self.user.name.upcase}!!!"
         #sleep(1.5)
-        choose_protein
+        main_menu
+    end
+
+    def main_menu
+        prompt.select("What would you like to do today #{user.name}") do |menu|
+            menu.choice "Choose Protein", -> {choose_protein}
+            menu.choice "Exit!", -> {exit_helper}
+            menu.choice "Delete Account!", -> {delete_account_helper}
+        end
     end
 
     def exit_helper
@@ -65,36 +73,48 @@ class Interface
         system 'clear'
     end
 
+    def delete_account_helper
+        current_user = User.find(self.user.id)
+        current_user.delete
+        puts "Your account has successfully been deleted."
+        # sleep(2)
+        welcome
+    end
+
     def choose_protein
         system 'clear'
-        prompt.select("What protein will you be having today?") do |protein|
-            protein.choice "Chicken", -> {main_menu_chicken}# -> something
-            protein.choice "Beef", -> {main_menu_beef}# -> something
+        prompt.select("What protein will you be having today?") do |menu|
+            Protein.all.each do |protein|
+                menu.choice protein.name, -> {main_menu_protein(protein.id)}
+            end
+            # protein.choice "Chicken", -> {main_menu_chicken}# -> something
+            # protein.choice "Beef", -> {main_menu_beef}# -> something
             # protein.choice "Chicken", # -> something
             # protein.choice "Chicken", # -> something
             # protein.choice "Chicken", # -> something
         end
     end
 
-    def main_menu_beef
+    def main_menu_protein(protein_id)
         system 'clear'
-        prompt.select("Main Menu for Beef") do |menu|
-            menu.choice "teriyaki beef", -> {user_recipe_connection(4)}
-            menu.choice "chuck roast", -> {user_recipe_connection(1)}
+        prompt.select("Main Menu") do |menu|
+            Recipe.all.where(protein_id: protein_id).each do |recp|
+                menu.choice recp.name, -> {user_recipe_connection(recp.id)}
+            end
             menu.choice "change protein", -> {choose_protein}
             menu.choice "Log Off", -> {exit_helper}
         end
     end
 
-    def main_menu_chicken
-        system 'clear'
-        prompt.select("Main Menu for Chicken") do |menu|
-            menu.choice "chicken noodle", -> {user_recipe_connection(2)}
-            menu.choice "roast chicken", -> {user_recipe_connection(3)}
-            menu.choice "change protein", -> {choose_protein}
-            menu.choice "Log Off", -> {exit_helper}
-        end
-    end
+    # def main_menu_chicken
+    #     system 'clear'
+    #     prompt.select("Main Menu for Chicken") do |menu|
+    #         menu.choice "chicken noodle", -> {user_recipe_connection(2)}
+    #         menu.choice "roast chicken", -> {user_recipe_connection(3)}
+    #         menu.choice "change protein", -> {choose_protein}
+    #         menu.choice "Log Off", -> {exit_helper}
+    #     end
+    # end
 
     def user_recipe_connection(recipe_id)
         UserRecipe.create(name: self.user.name, user_id: self.user.id, recipe_id: recipe_id)
@@ -112,28 +132,38 @@ class Interface
             @recipe_ingredient = i.ingredient
         end
         prompt.select("What would you like to do?") do |menu|
-            menu.choice "See ingredients", -> {recipe_ingredients}
+            menu.choice "See ingredients", -> {recipe_ingredients(recipe_id)}
             menu.choice "Choose a different protein", -> {choose_protein}
             menu.choice "Exit", -> {exit_helper}
         end
     end
 
-    def recipe_ingredients
+    def recipe_ingredients(recipe_id)
         @recipe_ingredient_arr = recipe_ingredient.split(", ")
-        puts recipe_ingredient_arr
+        puts " "
+        p recipe_ingredient_arr
         prompt.select("Would you like to see a different recipe or add another ingredient?") do |menu|
             menu.choice "yes", -> {choose_protein}
             menu.choice "no", -> {exit_helper}
+            menu.choice "update recipe rating", -> {update_recipe_rating(recipe_id)}
             menu.choice "add ingredient", -> {ingredient_add_helper}
             menu.choice "remove ingredient", -> {ingredient_remove_helper}
         end
     end 
 
+    def update_recipe_rating(recipe_id)
+        # binding.pry
+        new_rating = prompt.ask("what new rating would you like to give?")
+        self.user.recipes.where(id: recipe_id).update(rating: new_rating.to_i)
+        p self.user.recipes.where(id: recipe_id)
+        # binding.pry
+    end
+
     def ingredient_add_helper
         added_ingredient = prompt.ask("what ingredient would you like to add")
         recipe_ingredient_arr << added_ingredient
         puts recipe_ingredient_arr
-        binding.pry
+        # binding.pry
         # puts "What ingredient would you like to "
 
         # STDN.gets.chomp
