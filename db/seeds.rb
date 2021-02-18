@@ -27,6 +27,19 @@ recipe3 = Recipe.create(name: "roast chicken", ingredient: "5 lb whole chicken n
 
 recipe4 = Recipe.create(name: "teriyaki beef", ingredient: "2 lbs. cubed beef stew meat, 1 cup Soy Vay Veri Veri Teriyaki sauce, 1 cup diced white onion, toasted sesame seeds, sliced green onion, steamed white or brown rice, broccoli or sugar snap peas", difficulty: 1, time: 6, rating: 7, protein_id: beef.id)
 
+recipe5 = Recipe.create(name: "garlic-parmesan chicken", ingredient: "3 tbsp. extra-virgin olive oil, 2 lb. bone-in chicken thighs, Kosher salt, Freshly ground black pepper, 1 lb. baby red potatoes, 2 tbsp. butter, 5 cloves garlic, 2 tbsp. fresh thyme, Freshly chopped parsley, 2 tbsp. freshly grated Parmesan", difficulty: 4, time: 6, rating: 4, protein_id: chicken.id)
+
+recipe6 = Recipe.create(name: "italian beef", ingredient: "3-4 lb beef roast, 1 teaspoon salt, 1/4 teaspoon black pepper, 1 package Italian dressing mix or garlic herb seasoning, 2 cups low sodium beef broth, 1 jar pepperoncini peppers with juice, 12 sub or hoagie rolls, 12 slices provolone", difficulty: 1, time: 6, rating: 7, protein_id: beef.id)
+
+recipe7 = Recipe.create(name: "cheesy chicken spaghetti", ingredient: "1 large carrot peeled and shredded, 1/2 onion finely chopped, 1/2 green pepper chopped, 1/2 red pepper chopped, 1 teaspoon salt, 1 teaspoon minced garlic, 1/2 teaspoon paprika, 1/4 teaspoon black pepper, 2 1/2 cups low sodium chicken broth, 2 boneless skinless chicken breasts, 375 grams whole wheat spaghetti (1 small box), 3/4 cup 1% milk, 2 tablespoons corn starch, 2 cups shredded cheddar cheese", difficulty: 7, time: 6, rating: 6, protein_id: chicken.id)
+
+recipe8 = Recipe.create(name: "creamy white chicken chili", ingredient: "1 lb boneless skinless chicken breasts trimmed of excess fat, 1 yellow onion diced, 2 cloves garlic minced, 24 oz. chicken broth, 2 15oz cans great Northern beans drained and rinsed, 2 4oz cans diced, green chiles, 1 15oz can whole kernel corn drained, 1 tsp salt, 1/2 tsp black pepper, 1 tsp cumin, 3/4 tsp oregano, 1/2 tsp chili powder
+1/4 tsp cayenne pepper, small handful fresh cilantro chopped, 4 oz reduced fat cream cheese softened, 1/4 cup half and half", difficulty: 4, time: 8, rating: 7, protein_id: chicken.id)
+
+recipe9 = Recipe.create(name: "mongolian beef with pineapple", ingredient: "1/2 cup plus 1 1/2 tablespoons corn starch divided, 1 teaspoon baking soda optional, 1/4 teaspoon salt, 1/4 teaspoon black pepper, 2 teaspoons canola oil, 1 1/2 lbs flank or sirloin steak sliced thinly, 1/2 cup low sodium soy sauce, 2/3 cup beef broth, 1/3 cup brown sugar packed, 2 tablespoons hoisin sauce, 1 tablespoon Thai sweet red chili sauce, 1 teaspoon minced garlic, 1 teaspoon fresh minced ginger, 1/4 cup reserved pineapple juice, 1 cup canned pineapple chunks drained and juice reserved, 1/2 cup matchstick carrots, green onions, hot cooked rice", difficulty: 3, time: 6, rating: 8, protein_id: beef.id)
+
+recipe10 = Recipe.create(name: "honey balsamic beef stew", ingredient: "11 lb Little Potatoes, 1 lb stewing beef, 1 stalk celery finely chopped, 2 large carrots peeled and chopped, 1/2 medium onion finely chopped, 1/4 cup low sodium beef broth, 1/3 cup balsamic vinegar, 1/3 cup liquid honey, 2 tablespoons tomato paste, 1 tablespoon Worcestershire sauce, 2 teaspoons minced garlic, 1 teaspoon seasoning salt, 1/4 teaspoon black pepper, 2 tablespoons corn starch", difficulty: 6, time: 8, rating: 6, protein_id: beef.id)
+
 # #user_recipes
 # user_recipe1 = UserRecipe.create(name: "user_recipe1", user_id: max.id, recipe_id: recipe1.id)
 # user_recipe2 = UserRecipe.create(name: "user_recipe2", user_id: richi.id, recipe_id: recipe2.id)

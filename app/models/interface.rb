@@ -11,7 +11,8 @@ class Interface
     def welcome
         system 'clear'
         #do logo later
-        puts "Hello and welcome to crockpot recipe finder"
+        puts "Hello, and welcome to Crockpot Recipe Finder!"
+        puts " "
         #sleep(2)
         login_page
     end 
@@ -31,7 +32,7 @@ class Interface
         if User.find_by(name: username, password: password)
             self.user = User.find_by(name: username, password: password)
             # no music yet
-            puts "Let's Get Cookin #{self.user.name.upcase}!!!"
+            puts "Let's Get Cookin, #{self.user.name.upcase}!!!"
             #sleep(1.5)
             main_menu
         else
@@ -60,7 +61,7 @@ class Interface
     end
 
     def main_menu
-        prompt.select("What would you like to do today #{user.name}") do |menu|
+        prompt.select("What would you like to do today #{user.name}?") do |menu|
             menu.choice "Choose Protein", -> {choose_protein}
             menu.choice "Exit!", -> {exit_helper}
             menu.choice "Delete Account!", -> {delete_account_helper}
@@ -83,7 +84,7 @@ class Interface
 
     def choose_protein
         system 'clear'
-        prompt.select("What protein will you be having today?") do |menu|
+        prompt.select("Which protein would you like to see recipes for?") do |menu|
             Protein.all.each do |protein|
                 menu.choice protein.name, -> {main_menu_protein(protein.id)}
             end
