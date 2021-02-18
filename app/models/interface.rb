@@ -10,10 +10,10 @@ class Interface
 
     def welcome
         system 'clear'
-        #do logo later
+        Logo.start
         puts "Hello, and welcome to Crockpot Recipe Finder!"
         puts " "
-        #sleep(2)
+        sleep(2)
         login_page
     end 
 
@@ -33,11 +33,11 @@ class Interface
             self.user = User.find_by(name: username, password: password)
             # no music yet
             puts "Let's Get Cookin, #{self.user.name.upcase}!!!"
-            #sleep(1.5)
+            sleep(1.5)
             main_menu
         else
             puts "Incorrect Username or Password" #potentially add emoji's
-            #sleep(1.5)
+            sleep(1.5)
             login_page
         end
     end
@@ -54,9 +54,9 @@ class Interface
         password = prompt.ask("Enter Password")
         self.user = User.create(name: username, password: password)
         puts "Sign up complete."
-        #sleep(0.8)
+        sleep(0.8)
         puts "Let's Get Cookin #{self.user.name.upcase}!!!"
-        #sleep(1.5)
+        sleep(1.5)
         main_menu
     end
 
@@ -70,7 +70,7 @@ class Interface
 
     def exit_helper
         puts "Goodbye"
-        #sleep(2)
+        sleep(2)
         system 'clear'
     end
 
@@ -78,7 +78,7 @@ class Interface
         current_user = User.find(self.user.id)
         current_user.delete
         puts "Your account has successfully been deleted."
-        # sleep(2)
+        sleep(2)
         welcome
     end
 
