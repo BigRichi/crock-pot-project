@@ -168,7 +168,7 @@ class Interface
     end
 
     def ingredient_change_helper(recipe_id, new_recipe_ingredient_arr)
-        p "Ingredient successfully updated!"
+        p "Ingredient(s) successfully updated!"
         sleep(1.3)
         user.recipes.where(id: recipe_id).update(ingredient: new_recipe_ingredient_arr.join(", "))
         recipe_ingredients(recipe_id)
